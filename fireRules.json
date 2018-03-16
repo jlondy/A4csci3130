@@ -2,15 +2,24 @@
   "rules": {
     ".read": "true",
     ".write": "true",
-    "contacts": {
-            "$contact": {
-                "name": {
-                    ".validate": "newData.isString() && newData.val().length < 50"
-                },
-                "email": {
-                    ".validate": "newData.isString() && newData.val().matches(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}$/i)"
-                }
-            }
+    "businesses": {
+      "$business": {
+        "BusinessNumber": {
+          ".validate": "newData.val().length == 9 && newData.isNumber()"
+        },
+        "name": {
+          ".validate": "newData.isString() && newData.val().length > 1 && newData.val().length < 49"
+        },
+        "PrimaryBusiness": {
+          ".validate": "newData.isString() && ((newData.val().length == 6 && newData.val().contains('Fisher')) || (newData.val().length == 11 && newData.val().contains('Distributor')) || (newData.val().length == 9 && newData.val().contains('Processor')) || (newData.val().length == 11 && newData.val().contains('Fish Monger')))"
+        },
+        "Address": {
+          ".validate": "newData.val().length < 50"
+        },
+        "Location": {
+          ".validate": "newData.isString() && newData.val().length == 2 && (newData.val().contains('AB') || newData.val().contains('BC') || newData.val().contains('MB') || newData.val().contains('NB') || newData.val().contains('NL') || newData.val().contains('NS') || newData.val().contains('NT') || newData.val().contains('NU') || newData.val().contains('ON') || newData.val().contains('PE') || newData.val().contains('QC') || newData.val().contains('SK') || newData.val().contains('YT'))"
         }
+      }
+    }
   }
 }
